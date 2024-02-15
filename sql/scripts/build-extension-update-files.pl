@@ -208,7 +208,7 @@ sub generate_upgrade_script {
             next if $function_map{$old_function};
 
             # Enforcing: When its the same mayor, the signatures should exist in the new version
-            die "$old_function should exist in $new_minor" if $new_mayor == $old_mayor && $new_minor > $old_minor;
+            die "$old_function should exist in $new_minor" if $new_mayor == $old_mayor; # && $new_minor > $old_minor;
 
 
             # Remove from the extension

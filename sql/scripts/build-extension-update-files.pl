@@ -91,7 +91,7 @@ print "build-extension-update-file $new_version $old_version $signature_dir $out
 
 die "ERROR: Wrong format for new version expected n.n.n got '$new_version'" unless $new_version =~ $version_format;
 die "ERROR: Wrong format for old version expected n.n.n got '$old_version'" unless $old_version =~ $version_format;
-die "ERROR: '$new_version' must be greater than '$old_version'" unless version->parse($new_version) > version->parse($old_version);
+# die "ERROR: '$new_version' must be greater than '$old_version'" unless version->parse($new_version) > version->parse($old_version);
 die "ERROR: Can not update from '$old_version' must be at least '2.6.0'" if version->parse($old_version) < version->parse("2.6.0");
 
 my ($new_mayor) = $new_version  =~ $mayor_format;
@@ -208,7 +208,7 @@ sub generate_upgrade_script {
             next if $function_map{$old_function};
 
             # Enforcing: When its the same mayor, the signatures should exist in the new version
-            die "$old_function should exist in $new_minor" if $new_mayor == $old_mayor;
+            die "$old_function should exist in $new_minor" if $new_mayor == $old_mayor && $new_minor > $old_minor;
 
 
             # Remove from the extension
